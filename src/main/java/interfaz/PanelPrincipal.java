@@ -2,9 +2,6 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 
 public class PanelPrincipal extends JPanel {
     private PanelComprador comprador;
@@ -12,8 +9,8 @@ public class PanelPrincipal extends JPanel {
 
     public PanelPrincipal() {
         super();
-        comprador = new PanelComprador();
         expendedor = new PanelExpendedor(6);
+        comprador = new PanelComprador();
         comprador.setExpendedor(expendedor);
         this.add(comprador);
         this.add(expendedor);
@@ -24,5 +21,7 @@ public class PanelPrincipal extends JPanel {
 
     public void paintComponent (Graphics grafica){
         super.paintComponent(grafica);
+        comprador.repaint();
+        expendedor.repaint();
     }
 }
