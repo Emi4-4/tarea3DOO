@@ -23,6 +23,7 @@ public class Comprador {
      */
     public Comprador(Moneda moneda, int cualProducto, Expendedor exp)
             throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
+        /*
         Producto p=exp.comprarProducto(moneda,cualProducto);
         Moneda mon=exp.getVuelto();
         while (mon!=null){
@@ -39,7 +40,7 @@ public class Comprador {
      * Permite saber el monto total de vuelto que el comprador recibió.
      *
      * @return La suma de los valores de todas las monedas recibidas como vuelto.
-     */
+     *
     public int cuantoVuelto(){
         return vuelto;
     }
@@ -47,8 +48,11 @@ public class Comprador {
      * Entrega el "sonido" producido al consumir el producto comprado.
      *
      * @return El mensaje del producto consumido (ej: "cocacola") o null si no hubo compra.
-     */
+     *
     public String queCompraste() {
         return sonido;
     }
+
+    */
+}
 }

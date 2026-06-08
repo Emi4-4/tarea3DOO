@@ -12,5 +12,7 @@ public class Ventana extends JFrame {
 
         PanelPrincipal panel = new PanelPrincipal();
         add(panel);
+        setVisible(true);
+        setLocationRelativeTo(null);
     }
 }
