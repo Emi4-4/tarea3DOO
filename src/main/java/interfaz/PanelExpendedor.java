@@ -1,6 +1,6 @@
 package interfaz;
 
-import org.example.*;
+import org.example.*; 
 
 import javax.swing.*;
 import java.awt.*;
