@@ -1,4 +1,7 @@
 package org.example;
+
+import java.awt.*;
+
 /**
  * Clase que representa una moneda de 100.
  * Extiende la clase abstracta Moneda para heredar su comportamiento y
@@ -22,5 +25,13 @@ public class Moneda100 extends Moneda {
     @Override
     public int getValor() {
         return 100;
+    }
+
+    public void paintComponent(Graphics g) {
+        g.setColor(Color.PINK);
+        g.fillOval(x, y, 20, 20);
+        g.setColor(Color.BLACK);
+        g.drawOval(x, y, 20, 20);
+        g.drawString("100", x + 5, y + 14);
     }
 }
