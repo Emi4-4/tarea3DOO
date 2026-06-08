@@ -7,11 +7,21 @@ package org.example;
  * @author Valentina (arenisca)
  * @version 1.0
  */
+import java.awt.Graphics;
 public abstract class Moneda implements Comparable<Moneda> {
+    protected int x;
+    protected int y;
     /**
      * Constructor por defecto de la clase Moneda.
      */
     public Moneda() {}
+
+    public void setXY(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public abstract void paintComponent(Graphics g);
     /**
      * Método abstracto para obtener el valor monetario de la moneda.
      *

@@ -7,6 +7,8 @@ package org.example;
  * @author Lenin(Chamo0312)
  * @version 2.0
  */
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class Expendedor {
     /**deposito de bebidas y dulces*/
@@ -18,6 +20,10 @@ public class Expendedor {
     private Deposito<Producto> bonobon;
     /**deposito de monedas de vuelto*/
     private Deposito<Moneda> monedaVuelto;
+
+    private Producto productoEnDepositoEspecial;
+    private Deposito<Moneda> depositoMonedasGanadas;
+
     /**
      * Constructor que inicializa los depósitos y los llena con una cantidad inicial de productos.
      * Cada producto recibe un número de serie único basado en su tipo.
@@ -25,14 +31,18 @@ public class Expendedor {
      * @param numeroProductos Cantidad de unidades para cada tipo de producto.
      */
     public Expendedor(int numeroProductos) {
-        cocacola = new Deposito<Producto>();
-        sprite = new Deposito<Producto>();
-        fanta = new Deposito<Producto>();
-        super8 = new Deposito<Producto>();
-        snickers = new Deposito<Producto>();
-        bonobon = new Deposito<Producto>();
+        //posiciones x e y genericas por el momento ,abiertas a modificacion
+        cocacola = new Deposito<Producto>(60, 80);
+        sprite = new Deposito<Producto>(120, 80);
+        fanta = new Deposito<Producto>(180,  80);
+        super8 = new Deposito<Producto>(60, 220);
+        snickers = new Deposito<Producto>(120, 220);
+        bonobon = new Deposito<Producto>(180, 220);
 
-        monedaVuelto = new Deposito<Moneda>();
+        monedaVuelto = new Deposito<Moneda>(250, 380);
+
+        depositoMonedasGanadas = new Deposito<Moneda>(320, 380);
+        productoEnDepositoEspecial = null;
 
         if (numeroProductos > 0) {
             for (int i = 0; i < numeroProductos; i = i + 1) {
@@ -61,6 +71,45 @@ public class Expendedor {
     public Moneda getVuelto() {
         return monedaVuelto.getProducto();
     }
+
+    public Producto getProducto() {
+        Producto aux = this.productoEnDepositoEspecial;
+        this.productoEnDepositoEspecial = null;
+        return aux;
+    }
+
+    public void rellenarDepositosVacios() {
+        if (cocacola.getArraySize() == 0) {
+            cocacola.addProducto(new CocaCola(1000));
+        }
+        if (sprite.getArraySize() == 0) {
+            sprite.addProducto(new Sprite(2000));
+        }
+        if (fanta.getArraySize() == 0) {
+            fanta.addProducto(new Fanta(3000));
+        }
+        if (super8.getArraySize() == 0) {
+            super8.addProducto(new Super8(4000));
+        }
+        if (snickers.getArraySize() == 0) {
+            snickers.addProducto(new Snickers(5000));
+        }
+        if (bonobon.getArraySize() == 0) {
+            bonobon.addProducto(new BonoBon(6000));
+        }
+    }
+
+    private void generarVueltoDinamico(int vueltoTotal) {
+        while (vueltoTotal >= 500) {
+            monedaVuelto.addProducto(new Moneda500()); // Asume que tienes la clase Moneda500
+            vueltoTotal -= 500;
+        }
+
+        while (vueltoTotal >= 100) {
+            monedaVuelto.addProducto(new Moneda100());
+            vueltoTotal -= 100;
+        }
+    }
     /**
      * Procesa la compra de un producto validando el pago y el stock disponible.
      * Si la compra es exitosa, calcula y deposita el vuelto en monedas de 100.
@@ -74,7 +123,7 @@ public class Expendedor {
      * @throws PagoIncorrectoException Si se intenta realizar una compra con una moneda nula.
      */
 
-    public Producto comprarProducto(Moneda m, int cual)
+    public void comprarProducto(Moneda m, int cual)
             throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
         Producto producto = null;
         if (m == null) {
@@ -105,10 +154,8 @@ public class Expendedor {
                                 monedaVuelto.addProducto(m);
                                 throw new NoHayProductoException("No queda CocaCola en stock");
                             } else {
-                                int vuelto = (m.getValor() - productos.getPrecio()) / 100;
-                                for (int i = 0; i < vuelto; i++) {
-                                    monedaVuelto.addProducto(new Moneda100());
-                                }
+                                int vuelto = m.getValor() - productos.getPrecio();
+                                generarVueltoDinamico(vuelto);
                             }
                         }
                         break;
@@ -130,10 +177,8 @@ public class Expendedor {
                                 monedaVuelto.addProducto(m);
                                 throw new NoHayProductoException("No queda Sprite en stock");
                             } else {
-                                int vuelto = (m.getValor() - productos.getPrecio()) / 100;
-                                for (int i = 0; i < vuelto; i++) {
-                                    monedaVuelto.addProducto(new Moneda100());
-                                }
+                                int vuelto = m.getValor() - productos.getPrecio();
+                                generarVueltoDinamico(vuelto);
                             }
                         }
                         break;
@@ -155,10 +200,8 @@ public class Expendedor {
                                 monedaVuelto.addProducto(m);
                                 throw new NoHayProductoException("No queda Fanta en stock");
                             } else {
-                                int vuelto = (m.getValor() - productos.getPrecio()) / 100;
-                                for (int i = 0; i < vuelto; i++) {
-                                    monedaVuelto.addProducto(new Moneda100());
-                                }
+                                int vuelto = m.getValor() - productos.getPrecio();
+                                generarVueltoDinamico(vuelto);
                             }
                         }
                         break;
@@ -180,10 +223,8 @@ public class Expendedor {
                                 monedaVuelto.addProducto(m);
                                 throw new NoHayProductoException("No quedan super8 en stock");
                             } else {
-                                int vuelto = (m.getValor() - productos.getPrecio()) / 100;
-                                for (int i = 0; i < vuelto; i++) {
-                                    monedaVuelto.addProducto(new Moneda100());
-                                }
+                                int vuelto = m.getValor() - productos.getPrecio();
+                                generarVueltoDinamico(vuelto);
                             }
                         }
                         break;
@@ -204,10 +245,8 @@ public class Expendedor {
                                 monedaVuelto.addProducto(m);
                                 throw new NoHayProductoException("No quedan snickers en stock");
                             } else {
-                                int vuelto = (m.getValor() - productos.getPrecio()) / 100;
-                                for (int i = 0; i < vuelto; i++) {
-                                    monedaVuelto.addProducto(new Moneda100());
-                                }
+                                int vuelto = m.getValor() - productos.getPrecio();
+                                generarVueltoDinamico(vuelto);
                             }
                         }
                         break;
@@ -228,16 +267,48 @@ public class Expendedor {
                                 monedaVuelto.addProducto(m);
                                 throw new NoHayProductoException("No quedan BonoBon en stock");
                             } else {
-                                int vuelto = (m.getValor() - productos.getPrecio()) / 100;
-                                for (int i = 0; i < vuelto; i++) {
-                                    monedaVuelto.addProducto(new Moneda100());
-                                }
+                                int vuelto = m.getValor() - productos.getPrecio();
+                                generarVueltoDinamico(vuelto);
                             }
                         }
                         break;
                 }
             }
         }
-        return producto;
+        if (producto != null) {
+            this.depositoMonedasGanadas.addProducto(m);
+        }
+
+        this.productoEnDepositoEspecial = producto;
+    }
+
+    public void paintComponent(Graphics g) {
+
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(50, 50, 400, 500);
+        g.setColor(Color.BLACK);
+        g.drawRect(50, 50, 400, 500);
+
+        cocacola.paintComponent(g);
+        sprite.paintComponent(g);
+        fanta.paintComponent(g);
+        super8.paintComponent(g);
+        snickers.paintComponent(g);
+        bonobon.paintComponent(g);
+
+
+        monedaVuelto.paintComponent(g);
+        depositoMonedasGanadas.paintComponent(g);
+
+        int especialX = 60;
+        int especialY = 380;
+        g.setColor(Color.BLACK);
+        g.fillRect(especialX, especialY, 150, 60);
+
+        if (productoEnDepositoEspecial != null) {
+            productoEnDepositoEspecial.setXY(especialX + 50, especialY + 20);
+            productoEnDepositoEspecial.paintComponent(g, 40, 20);
+        }
+
     }
 }
