@@ -96,8 +96,10 @@ public class PanelComprador extends JPanel {
         else {
             for(int i = 0; i < zonasProductos.size(); i++){
                 if (zonasProductos.get(i).contains(x, y)) {
-                    productoSeleccionado = i + 1; // 1=Coca, 2=Sprite, 3=Fanta, 4=Snickers, 5=Super8, 6=Bonobon
-                    mensaje = "Producto " + productoSeleccionado + " seleccionado";
+                    productoSeleccionado = i + 1;
+                    String[] nombres = {"Coca", "Sprite", "Fanta", "Snickers", "Super8", "Bonobon"};// 1=Coca, 2=Sprite, 3=Fanta, 4=Snickers, 5=Super8, 6=Bonobon
+                    int[] precios = {1000, 900, 1100, 1400, 800, 600};
+                    mensaje = nombres[i] + " seleccionado ($" + precios[i] + ")";
                     break;
                 }
             }

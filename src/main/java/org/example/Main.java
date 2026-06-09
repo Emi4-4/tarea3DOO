@@ -7,7 +7,9 @@ public class Main {
         int DineroInicial = 5000;
         try {
             String input = JOptionPane.showInputDialog(
-                    null, "Ingrese el monto inicial del monedero");
+                    null, "Ingrese el monto inicial del monedero",
+                    "Configuracion del monedero",
+                    JOptionPane.QUESTION_MESSAGE);
             if (input != null){
                 DineroInicial = Integer.parseInt(input);
             }
