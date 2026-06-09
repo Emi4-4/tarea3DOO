@@ -7,10 +7,10 @@ public class PanelPrincipal extends JPanel {
     private PanelComprador comprador;
     private PanelExpendedor expendedor;
 
-    public PanelPrincipal() {
+    public PanelPrincipal(int DineroInicial) {
         super();
         expendedor = new PanelExpendedor(6);
-        comprador = new PanelComprador();
+        comprador = new PanelComprador(DineroInicial);
         comprador.setExpendedor(expendedor);
         this.add(comprador);
         this.add(expendedor);

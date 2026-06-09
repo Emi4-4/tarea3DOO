@@ -82,9 +82,7 @@ public class PanelExpendedor extends JPanel {
     private void dibujarFila(Graphics g, Deposito<Producto> dep, int x, int y, Color color) {
         for (int i =0 ; i < Math.min(dep.getArraySize(), 6); i++) {
             Producto p = dep.getProductoEnPosicion(i);
-
             p.setXY(x + (i * 45), y);
-
             p.paintComponent(g, 30, 40);
         }
     }

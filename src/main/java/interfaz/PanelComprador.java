@@ -28,9 +28,9 @@ public class PanelComprador extends JPanel {
 
 
 
-    public PanelComprador() {
+    public PanelComprador(int DineroInicial) {
         super();
-        this.monedero = 5000; // Saldo inicial
+        this.monedero = DineroInicial; // Saldo inicial
         this.mensaje = "Seleccione moneda y producto";
         this.ultimoProducto = "";
         this.ultimoVuelto = 0;
@@ -68,17 +68,29 @@ public class PanelComprador extends JPanel {
 
     public void clickMouse(int x, int y) {
         if (zonaMoneda100.contains(x, y)) {
-            monedaSeleccionada = new Moneda100();
-            mensaje = "Moneda de 100 seleccionada";
+            if (monedero >= 100){
+                monedaSeleccionada = new Moneda100();
+            } else {
+                mensaje = "Saldo insuficiente";
+            }
         } else if (zonaMoneda500.contains(x, y)) {
-            monedaSeleccionada = new Moneda500();
-            mensaje = "Moneda de 500 seleccionada";
+            if (monedero >= 500){
+                monedaSeleccionada = new Moneda500();
+            } else {
+                mensaje = "Saldo insuficiente";
+            }
         } else if (zonaMoneda1000.contains(x, y)) {
-            monedaSeleccionada = new Moneda1000();
-            mensaje = "Moneda de 1000 seleccionada";
+            if (monedero >= 1000){
+                monedaSeleccionada = new Moneda1000();
+            } else {
+                mensaje = "Saldo insuficiente";
+            }
         } else if (zonaMoneda1500.contains(x, y)) {
-            monedaSeleccionada = new Moneda1500();
-            mensaje = "Moneda de 1500 seleccionada";
+            if (monedero >= 1500){
+                monedaSeleccionada = new Moneda1500();
+            } else {
+                mensaje = "Saldo insuficiente";
+            }
         }
         // Seleccionar producto
         else {
@@ -101,6 +113,7 @@ public class PanelComprador extends JPanel {
                     expendedor.comprarProducto(monedaSeleccionada, productoSeleccionado);
                     // Si llegamos aquí, la compra fue exitosa (el producto está en depósito especial)
                     mensaje = "Compra exitosa! Recoga su producto y vuelto";
+                    monedero = monedero - monedaSeleccionada.getValor();
                     monedaSeleccionada = null;
                     productoSeleccionado = -1;
                     panelExpendedor.revalidate();
