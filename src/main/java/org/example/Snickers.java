@@ -20,14 +20,54 @@ public class Snickers extends Dulce{
 
     @Override
     public void paintComponent(Graphics g, int ancho, int alto) {
-        g.setColor(new Color(74, 40, 18));
+        java.awt.Shape clipOriginal = g.getClip();
+        g.clipRect(x, y, ancho, alto);
+
+
+        g.setColor(new Color(0, 0, 0, 80));
+        g.fillRect(x + 2, y + 2, ancho, alto);
+
+
+        g.setColor(new Color(60, 35, 10));
         g.fillRect(x, y, ancho, alto);
 
-        g.setColor(Color.WHITE);
-        g.fillRect(x + 4, y + 2, ancho - 8, alto - 4);
 
-        g.setColor(Color.BLUE);
-        g.fillRect(x + 6, y + 4, ancho - 12, alto - 8);
+        g.setColor(new Color(40, 20, 5));
+        int altoBorde = Math.max(2, alto / 12);
+        for (int i = x; i < x + ancho; i += 3) {
+            g.drawLine(i, y, i, y + altoBorde);
+            g.drawLine(i, y + alto - altoBorde, i, y + alto);
+        }
+
+
+        g.setColor(new Color(255, 255, 255, 40));
+        g.fillRect(x + 3, y + altoBorde, ancho / 6, alto - (2 * altoBorde));
+
+        int logoAncho = (int) (ancho * 0.8);
+        int logoAlto = alto / 3;
+        int logoX = x + (ancho - logoAncho) / 2;
+        int logoY = y + (alto - logoAlto) / 2;
+
+        g.setColor(new Color(200, 0, 0));
+        g.fillRect(logoX, logoY, logoAncho, logoAlto);
+
+
+        g.setColor(Color.WHITE);
+        g.fillRect(logoX + 2, logoY + 2, logoAncho - 4, logoAlto - 4);
+
+
+        g.setColor(new Color(0, 45, 150));
+        String texto = "SN";
+        int tamanoFuente = Math.max(9, logoAncho / 2); // Código limpio y reducido
+
+        g.setFont(new Font("Arial Black", Font.BOLD, tamanoFuente));
+        FontMetrics fm = g.getFontMetrics();
+
+        int textoX = logoX + (logoAncho - fm.stringWidth(texto)) / 2;
+        int textoY = logoY + (logoAlto / 2) + (fm.getAscent() / 3);
+        g.drawString(texto, textoX, textoY);
+
+        g.setClip(clipOriginal);
 
         g.setColor(Color.BLACK);
         g.drawRect(x, y, ancho, alto);
