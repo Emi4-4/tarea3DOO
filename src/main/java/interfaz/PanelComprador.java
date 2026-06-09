@@ -103,6 +103,8 @@ public class PanelComprador extends JPanel {
                     mensaje = "Compra exitosa! Recoga su producto y vuelto";
                     monedaSeleccionada = null;
                     productoSeleccionado = -1;
+                    panelExpendedor.revalidate();
+                    panelExpendedor.repaint();
                 } catch (PagoIncorrectoException | PagoInsuficienteException | NoHayProductoException ex) {
                     mensaje = "Error: " + ex.getMessage();
                     // Devolver moneda en caso de error
@@ -164,6 +166,7 @@ public class PanelComprador extends JPanel {
         dibujarZona(g, zonaMoneda1000, "$1000", new Color(144, 238, 144));
         dibujarZona(g, zonaMoneda1500, "$1500", new Color(173, 216, 230));
 
+        g.drawString("PRODUCTOS", 30, 115);
         String[] nombresProductos = {"Coca", "Sprite", "Fanta", "Snickers", "Super8", "Bonobon"};
         Color[] coloresProductos = {
                 new Color(255, 99, 71),

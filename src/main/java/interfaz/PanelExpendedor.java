@@ -45,32 +45,33 @@ public class PanelExpendedor extends JPanel {
 
         // 1. Cuerpo de la máquina (Rojo)
         g.setColor(new Color(200, 0, 0));
-        g.fillRect(20, 20, 260, 500);
+        g.fillRect(20, 20, 320, 500);
 
         // 2. Vidrio de la vitrina
         g.setColor(new Color(200, 220, 255));
-        g.fillRect(40, 40, 220, 350);
+        g.fillRect(40, 40, 270, 350);
         g.setColor(Color.BLACK);
-        g.drawRect(40, 40, 220, 350);
+        g.drawRect(40, 40, 270, 350);
         g.setColor(new Color(255, 255, 255, 50));
-        g.fillRect(45, 45, 100, 340);
+        g.fillRect(45, 45, 150, 340);
         g.setColor(new Color(255, 255, 255, 30));
         g.fillRect(40, 40, 220, 350);
 
         // 3. Estantes
         g.setColor(Color.GRAY);
         for (int i = 1; i <= 5; i++) {
-            g.fillRect(40, 40 + (i * 60), 220, 5);
+            g.fillRect(40, 40 + (i * 60), 270, 5);
         }
 
         // 4. Bandeja de salida
         g.setColor(new Color(150, 150, 150));
-        g.fillRect(60, 420, 180, 70);
+        g.fillRect(60, 420, 230, 70);
         g.setColor(Color.BLACK);
-        g.drawRect(60, 420, 180, 70);
-        g.drawString("PUSH", 135, 460);
+        g.drawRect(60, 420, 230, 70);
+        g.drawString("PUSH", 160, 460);
 
         // 5. DIBUJAR PRODUCTOS (Llamamos a nuestra nueva lógica)
+        g.setColor(Color.BLACK);
         dibujarFila(g, expendedor.getCocacola(), 50, 50, Color.RED);
         dibujarFila(g, expendedor.getSprite(), 50, 110, Color.GREEN);
         dibujarFila(g, expendedor.getFanta(), 50, 170, Color.ORANGE);
@@ -79,7 +80,7 @@ public class PanelExpendedor extends JPanel {
         dibujarFila(g, expendedor.getBonobon(), 50, 350, Color.PINK);
     }
     private void dibujarFila(Graphics g, Deposito<Producto> dep, int x, int y, Color color) {
-        for (int i = 0; i < Math.min(dep.getArraySize(), 5); i++) {
+        for (int i =0 ; i < Math.min(dep.getArraySize(), 6); i++) {
             Producto p = dep.getProductoEnPosicion(i);
 
             p.setXY(x + (i * 45), y);
