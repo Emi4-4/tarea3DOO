@@ -20,17 +20,38 @@ public class Fanta extends Bebida{
 
     @Override
     public void paintComponent(Graphics g, int ancho, int alto) {
+        // 1. Base del cuerpo
+        g.setColor(new Color(200, 100, 0));
+        g.fillRoundRect(x, y, ancho, alto, 15, 15);
 
-        g.setColor(new Color(242, 103, 34));
-        g.fillRect(x, y, ancho, alto);
+        // 2. Cuerpo principal
+        g.setColor(new Color(255, 140, 0));
+        g.fillRoundRect(x + 2, y, ancho - 4, alto, 15, 15);
 
+        // 3. REFLEJO LUMINOSO
+        g.setColor(new Color(255, 255, 255, 80));
+        g.fillRoundRect(x + 5, y + 5, ancho/3, alto - 10, 10, 10);
 
-        g.setColor(new Color(0, 40, 135));
-        g.fillRect(x + 4, y + 2, ancho - 8, 3);
+        // 4. Sombra interior
+        g.setColor(new Color(0, 0, 0, 30));
+        g.fillRoundRect(x + ancho - 10, y, 10, alto, 15, 15);
 
+        // 5. Etiqueta
+        g.setColor(new Color(255, 255, 255, 150));
+        g.fillOval(x + 5, y + alto/3, ancho - 10, alto/4);
 
-        g.setColor(Color.BLACK);
-        g.drawRect(x, y, ancho, alto);
+        // 6. Burbujas
+        g.setColor(new Color(255, 255, 255, 180));
+        java.util.Random rand = new java.util.Random();
+        for (int i = 0; i < 15; i++) {
+            g.fillOval(x + 10 + rand.nextInt(ancho - 25), y + alto/3 + rand.nextInt(alto/4), 3, 3);
+        }
+
+        // 7. Tapa y Borde
+        g.setColor(new Color(50, 50, 50));
+        g.fillRect(x + ancho/4, y, ancho/2, 5);
+        g.setColor(new Color(150, 70, 0));
+        g.drawRoundRect(x, y, ancho, alto, 15, 15);
     }
 
     /**

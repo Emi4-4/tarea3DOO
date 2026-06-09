@@ -24,7 +24,7 @@ public class PanelExpendedor extends JPanel {
         super();
         this.expendedor=new Expendedor(numeroProductos);
         this.setLayout(null);
-        this.setBackground(new Color(70, 70, 70));
+        this.setBackground(new Color(220, 220, 220));
         this.setPreferredSize(new Dimension(500, 600));
 
         this.addMouseListener(new MouseAdapter() {
@@ -52,6 +52,10 @@ public class PanelExpendedor extends JPanel {
         g.fillRect(40, 40, 220, 350);
         g.setColor(Color.BLACK);
         g.drawRect(40, 40, 220, 350);
+        g.setColor(new Color(255, 255, 255, 50));
+        g.fillRect(45, 45, 100, 340);
+        g.setColor(new Color(255, 255, 255, 30));
+        g.fillRect(40, 40, 220, 350);
 
         // 3. Estantes
         g.setColor(Color.GRAY);
@@ -75,12 +79,12 @@ public class PanelExpendedor extends JPanel {
         dibujarFila(g, expendedor.getBonobon(), 50, 350, Color.PINK);
     }
     private void dibujarFila(Graphics g, Deposito<Producto> dep, int x, int y, Color color) {
-        // Dibuja hasta 5 productos por fila (ajustar)
         for (int i = 0; i < Math.min(dep.getArraySize(), 5); i++) {
-            g.setColor(color);
-            g.fillRect(x + (i * 40), y, 30, 40);
-            g.setColor(Color.BLACK);
-            g.drawRect(x + (i * 40), y, 30, 40);
+            Producto p = dep.getProductoEnPosicion(i);
+
+            p.setXY(x + (i * 45), y);
+
+            p.paintComponent(g, 30, 40);
         }
     }
 }

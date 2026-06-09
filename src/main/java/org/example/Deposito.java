@@ -63,19 +63,7 @@ public class Deposito<E> {
     public int getArraySize() {
         return Productos.size();
     }
-
-    public void paintComponent(Graphics g) {
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(x, y, 50, 100);
-        g.setColor(Color.BLACK);
-        g.drawRect(x, y, 50, 100);
-
-        for (E elemento : Productos) {
-            if (elemento instanceof Producto) {
-                ((Producto) elemento).paintComponent(g, 40, 12);
-            } else if (elemento instanceof Moneda) {
-                ((Moneda) elemento).paintComponent(g);
-            }
-        }
+    public E getProductoEnPosicion(int i) {
+        return Productos.get(i);
     }
 }
