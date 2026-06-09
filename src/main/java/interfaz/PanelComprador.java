@@ -122,10 +122,10 @@ public class PanelComprador extends JPanel {
                     panelExpendedor.repaint();
                 } catch (PagoIncorrectoException | PagoInsuficienteException | NoHayProductoException ex) {
                     mensaje = "Error: " + ex.getMessage();
+                    monedaSeleccionada = null;
                     // Devolver moneda en caso de error
                     Moneda devuelta = expendedor.getVuelto();
                     if (devuelta != null) {
-                        monedero += devuelta.getValor();
                         mensaje += " | Se devolvió $" + devuelta.getValor();
                     }
                 }
