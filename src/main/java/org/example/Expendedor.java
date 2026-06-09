@@ -282,33 +282,11 @@ public class Expendedor {
         this.productoEnDepositoEspecial = producto;
     }
 
-    public void paintComponent(Graphics g) {
+    public Deposito<Producto> getCocacola() { return cocacola; }
+    public Deposito<Producto> getSprite() { return sprite; }
+    public Deposito<Producto> getFanta() { return fanta; }
+    public Deposito<Producto> getSuper8() { return super8; }
+    public Deposito<Producto> getSnickers() { return snickers; }
+    public Deposito<Producto> getBonobon() { return bonobon; }
 
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(50, 50, 400, 500);
-        g.setColor(Color.BLACK);
-        g.drawRect(50, 50, 400, 500);
-
-        cocacola.paintComponent(g);
-        sprite.paintComponent(g);
-        fanta.paintComponent(g);
-        super8.paintComponent(g);
-        snickers.paintComponent(g);
-        bonobon.paintComponent(g);
-
-
-        monedaVuelto.paintComponent(g);
-        depositoMonedasGanadas.paintComponent(g);
-
-        int especialX = 60;
-        int especialY = 380;
-        g.setColor(Color.BLACK);
-        g.fillRect(especialX, especialY, 150, 60);
-
-        if (productoEnDepositoEspecial != null) {
-            productoEnDepositoEspecial.setXY(especialX + 50, especialY + 20);
-            productoEnDepositoEspecial.paintComponent(g, 40, 20);
-        }
-
-    }
 }

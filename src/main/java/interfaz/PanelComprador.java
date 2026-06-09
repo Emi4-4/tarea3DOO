@@ -151,16 +151,49 @@ public class PanelComprador extends JPanel {
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
+
         Font font = new Font("Arial", Font.BOLD, 14);
         g.setFont(font);
-        // color monedero
+
+
         g.setColor(Color.BLACK);
         g.drawString("Monedero: $" + monedero, 30, 30);
 
-        //colores de las zonas
+        dibujarZona(g, zonaMoneda100, "$100", new Color(220, 220, 220));
+        dibujarZona(g, zonaMoneda500, "$500", new Color(255, 182, 193));
+        dibujarZona(g, zonaMoneda1000, "$1000", new Color(144, 238, 144));
+        dibujarZona(g, zonaMoneda1500, "$1500", new Color(173, 216, 230));
 
-        //mensajes etc
+        String[] nombresProductos = {"Coca", "Sprite", "Fanta", "Snickers", "Super8", "Bonobon"};
+        Color[] coloresProductos = {
+                new Color(255, 99, 71),
+                new Color(152, 251, 152),
+                new Color(255, 165, 0),
+                new Color(210, 105, 30),
+                new Color(255, 215, 0),
+                new Color(255, 192, 203)
+        };
+
+        for (int i = 0; i < zonasProductos.size(); i++) {
+            dibujarZona(g, zonasProductos.get(i), nombresProductos[i], coloresProductos[i]);
+        }
+
+        dibujarZona(g, zonaComprar, "COMPRAR", new Color(50, 205, 50));
+        dibujarZona(g, zonaRecogerProducto, "Sacar Producto", new Color(100, 149, 237));
+        dibujarZona(g, zonaRecogerVuelto, "Recoger Vuelto", new Color(255, 228, 181));
+
+        g.setColor(Color.BLUE);
+        g.drawString("Mensaje: " + mensaje, 30, 410);
+
+        g.setColor(Color.DARK_GRAY);
+
+        String txtMoneda = (monedaSeleccionada != null) ? "$" + monedaSeleccionada.getValor() : "Ninguna";
+        g.drawString("Moneda en mano: " + txtMoneda, 30, 440);
+
+        String txtProd = (productoSeleccionado != -1) ? nombresProductos[productoSeleccionado - 1] : "Ninguno";
+        g.drawString("Producto a pedir: " + txtProd, 30, 470);
+
+        g.drawString("Último producto retirado: " + (ultimoProducto.isEmpty() ? "Ninguno" : ultimoProducto), 30, 500);
     }
 
     private void dibujarZona(Graphics g, Rectangle rect, String texto, Color color) {
