@@ -2,7 +2,20 @@ package interfaz;
 
 import javax.swing.*;
 
+/**
+ * Ventana principal de la aplicacion.
+ * Solicita el saldo inicial del monedero y
+ * contiene el panel principal del expendedor.
+ * @author Emiliano(Emi4-4)
+ * @author Valentina(arenisca)
+ * @author Lenin(Chamo0312)
+ * @version 1.0
+ */
 public class Ventana extends JFrame {
+    /**
+     * Crea la ventana principal y solicita
+     * el saldo inicial del monedero del comprador.
+     */
     public Ventana(){
         super();
         int DineroInicial = 5000;

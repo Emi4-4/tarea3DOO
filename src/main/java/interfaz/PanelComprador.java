@@ -1,5 +1,4 @@
 package interfaz;
-
 import javax.swing.*;
 import java.awt.*;
 import org.example.*;
@@ -7,6 +6,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+/**Panel encargado de representar al comprador
+ * Permite seleccionar monedas, elegir productos,
+ * realizar la compra y retirar productos o vuelto.
+ * @author Emiliano(Emi4-4)
+ * @author Valentina(arenisca)
+ * @author Lenin(Chamo0312)
+ * @version 1.0
+ */
 public class PanelComprador extends JPanel {
     private PanelExpendedor panelExpendedor;
     private Expendedor expendedor;
@@ -27,6 +34,10 @@ public class PanelComprador extends JPanel {
     private Rectangle zonaRecogerVuelto;
 
 
+    /**
+     * Crea un comprador con un saldo inicial
+     * @param DineroInicial Dinero disponible inicialmente en el monedero del comprador
+     */
 
     public PanelComprador(int DineroInicial) {
         super();
@@ -65,6 +76,13 @@ public class PanelComprador extends JPanel {
         });
 
     }
+
+    /**
+     * Procesa las acciones del usuario al hacer click en
+     * los distintos elementos de la interfaz
+     * @param x coordenada horizontal del click
+     * @param y coordenada vertical del click
+     */
 
     public void clickMouse(int x, int y) {
         if (zonaMoneda100.contains(x, y)) {
@@ -160,11 +178,24 @@ public class PanelComprador extends JPanel {
 
         repaint();
     }
+
+    /**
+     * Asocia este panel con el panel que representa visualmente
+     * al expendedor y obtiene la referencia al objeto
+     * Expendedor usado por la aplicacion
+     * @param panelExpendedor panel grafico del expendedor
+     */
+
     public void setExpendedor(PanelExpendedor panelExpendedor){
         this.panelExpendedor = panelExpendedor;
         this.expendedor = panelExpendedor.getExpendedor();
     }
 
+    /**
+     *Dibuja los elementos graficos del panel, incluyendo botones,
+     * mensajes y estado actual del comprador
+     * @param g contexto grafico usado para dibujar
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -213,6 +244,14 @@ public class PanelComprador extends JPanel {
 
         g.drawString("Último producto retirado: " + (ultimoProducto.isEmpty() ? "Ninguno" : ultimoProducto), 30, 500);
     }
+
+    /**
+     * Dibuja un rectangulo coloreado con el texto centrado.
+     * @param g contexto grafico
+     * @param rect area donde se dibujara el texto
+     * @param texto texto a mostrar
+     * @param color color de fondo del elemento
+     */
 
     private void dibujarZona(Graphics g, Rectangle rect, String texto, Color color) {
         g.setColor(color);

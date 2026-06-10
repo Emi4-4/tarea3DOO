@@ -7,6 +7,16 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Panel encargado de representar graficamente el expendedor
+ * Muestra los productos disponibles y actualiza su estado
+ * conforme se realizan compras.
+ * @author Emiliano(Emi4-4)
+ * @author Valentina(arenisca)
+ * @author Lenin(Chamo0312)
+ * @version 1.0
+ */
+
 public class PanelExpendedor extends JPanel {
     private Expendedor expendedor;
     private JPanel botones;
@@ -20,6 +30,12 @@ public class PanelExpendedor extends JPanel {
 //    private JButton botonSnicker = new JButton();
 
     // debe considerar un numero de productos, dulces y bebidas, para la interfaz
+
+    /**
+     * Crea el panel grafico del expendedor.
+     * @param numeroProductos Cantidad inicial de productos que tendra cada deposito.
+     */
+
     public PanelExpendedor(int numeroProductos){
         super();
         this.expendedor=new Expendedor(numeroProductos);
@@ -35,9 +51,21 @@ public class PanelExpendedor extends JPanel {
             }
         });
     }
+
+    /**
+     * Obtiene la instancia del expendedor asociada a este panel grafico.
+     * @return Objeto expendedor utilizado por la interfaz.
+     */
+
     public Expendedor getExpendedor() {
         return expendedor;
     }
+
+    /**
+     * Dibuja la representacion visual de la maquina expendedora,
+     * incluyendo su estructura y elementos disponibles.
+     * @param g contexto grafico utilizado para dibujar.
+     */
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -79,6 +107,16 @@ public class PanelExpendedor extends JPanel {
         dibujarFila(g, expendedor.getSnickers(), 50, 290, Color.MAGENTA);
         dibujarFila(g, expendedor.getBonobon(), 50, 350, Color.PINK);
     }
+
+    /**
+     * Dibuja una fila de productos pertenecientes a un deposito
+     * @param g contexto grafico
+     * @param dep deposito de referencia
+     * @param x coordenada horizontal inicial
+     * @param y coordenada vertical inicial
+     * @param color color asociado a la fila de productos
+     */
+
     private void dibujarFila(Graphics g, Deposito<Producto> dep, int x, int y, Color color) {
         for (int i =0 ; i < Math.min(dep.getArraySize(), 6); i++) {
             Producto p = dep.getProductoEnPosicion(i);
